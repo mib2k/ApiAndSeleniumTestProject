@@ -6,7 +6,6 @@ namespace SeleniumTestFeatures
     [Binding]
     class Hooks
     {
-
         [BeforeScenario]
         public void Setup()
         {

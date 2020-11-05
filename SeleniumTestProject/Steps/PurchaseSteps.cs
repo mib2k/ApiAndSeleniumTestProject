@@ -1,4 +1,6 @@
-﻿namespace SeleniumTestProject.Steps
+﻿using SeleniumTestProject.Pages;
+
+namespace SeleniumTestProject.Steps
 {
     class PurchaseSteps : BaseSteps
     {
@@ -6,7 +8,7 @@
 
         public void StartPurchaseChain() { 
         
-            string amount  = _purchasePage.TotalAmount.Text;
+            var amount  = _purchasePage.TotalAmount.Text;
         }
     }
 }

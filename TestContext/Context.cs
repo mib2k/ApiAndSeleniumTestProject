@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using System.Threading;
 
-namespace TestContext
+namespace Framework
 {
     public class Context
     {
-        private static ThreadLocal<Context> _Instance;
+        private static readonly ThreadLocal<Context> Instance;
 
         static Context()
         {
-            _Instance = new ThreadLocal<Context>(() => { return new Context(); });
+            Instance = new ThreadLocal<Context>(() => new Context());
         }
+
         private Context() { }
 
-        public static Context Current
-        {
-            get { return _Instance.Value; }
-        }
+        public static Context Current => Instance.Value;
 
         public Dictionary<string, string> KeyValuePairs { get; set; } = new Dictionary<string, string>();
     }

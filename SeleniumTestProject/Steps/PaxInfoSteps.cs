@@ -1,5 +1,4 @@
-﻿using SeleniumTestProject.ElementExtensions;
-using SeleniumTestProject.Pages;
+﻿using SeleniumTestProject.Pages;
 namespace SeleniumTestProject.Steps
 {
     class PaxInfoSteps : BaseSteps

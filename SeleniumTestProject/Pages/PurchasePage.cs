@@ -1,15 +1,11 @@
-﻿using SeleniumTestProject.Pages;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
-using SeleniumTestProject.ElementExtensions;
 
-namespace SeleniumTestProject
+namespace SeleniumTestProject.Pages
 {
     public class PurchasePage : BasePage
     {
         [FindsBy(How = How.XPath, Using = "//*[@data-test-id='test_total']")]
         public IWebElement TotalAmount { get; private set; }
-
     }
 }

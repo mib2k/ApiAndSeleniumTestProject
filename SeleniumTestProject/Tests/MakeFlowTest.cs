@@ -1,5 +1,4 @@
 using NUnit.Framework;
-
 using SeleniumTestProject.Steps;
 using System;
 
@@ -26,12 +25,9 @@ namespace SeleniumTestProject.Tests
             travelEssentialsSteps = new TravelEssentialsSteps();
             travelExtrasSteps = new TravelExtrasSteps();
             purchaseSteps = new PurchaseSteps();
-
         }
 
-
         [Test]
-        
         [Parallelizable(ParallelScope.Self)]
         public void SimpleTest()
         {
@@ -53,7 +49,6 @@ namespace SeleniumTestProject.Tests
             travelExtrasSteps.ClickContinueBtn();
 
             purchaseSteps.StartPurchaseChain();
-
         }
 
         [Test]

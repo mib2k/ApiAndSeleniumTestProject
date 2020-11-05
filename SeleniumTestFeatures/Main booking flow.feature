@@ -3,7 +3,6 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
 Scenario: Add two numbers
 	Given Select departure DUB and arrival LHR with type ONE_WAY
 	And Select date 14 days from now

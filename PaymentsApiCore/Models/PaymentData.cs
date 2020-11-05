@@ -1,7 +1,5 @@
-﻿using PaymentsApiCore.Models.Responces;
+﻿using PaymentsApiCore.Models.Responses;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PaymentsApiCore.Models
 {

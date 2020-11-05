@@ -1,52 +1,37 @@
 ﻿using Newtonsoft.Json;
-using PaymentsApiCore.Models;
 using PaymentsApiCore.Models.Requests;
-using PaymentsApiCore.Models.Responces;
+using PaymentsApiCore.Models.Responses;
 using RestSharp;
-using System;
 
-namespace PaymentsApiCore
+namespace PaymentsApiCore.Client
 {
     public class PaymentClient
     {
+        public AuthenticationKeyResponse AuthenticatePayment(AuthenticationKeyRequest request) 
+            => RequestExecution<AuthenticationKeyResponse, AuthenticationKeyRequest>(request, PaymentsResource.baseUrl + "/paymentshub/api/v1/authenticationkey");
 
-        public AuthenticationKeyResponse AuthenticatePayment(AuthenticationKeyRequest request)
+        public TokenExIFrameResponse TokenEx(TokenExIFrameRequest request) 
+            => RequestExecution<TokenExIFrameResponse, TokenExIFrameRequest>(request, "https://test-htp.tokenex.com/iframe/v3");
+
+        public CreatePaymentResponse CreatePayment(CreatePaymentRequest request) 
+            => RequestExecution<CreatePaymentResponse, CreatePaymentRequest>(request, PaymentsResource.baseUrl + "/paymentshub/api/v1/payments");
+
+        private TResponse RequestExecution<TResponse, TRequest>(TRequest request, string url) where TResponse : class where TRequest : class
         {
-            object payload = JsonConvert.SerializeObject(request);
-            var response = SendRequest(PaymentsResource.baseUrl + "/paymentshub/api/v1/authenticationkey", payload);
-            AuthenticationKeyResponse authResponse = JsonConvert.DeserializeObject<AuthenticationKeyResponse>(response.Content);
-
-            return authResponse;
+            var payload= JsonConvert.SerializeObject(request);
+            var response = SendRequest(url, payload);
+            var jsonResponse = JsonConvert.DeserializeObject<TResponse>(response.Content);
+            return jsonResponse;
         }
 
-        public TokenExIFrameResponse TokenEx(TokenExIFrameRequest request)
-        {
-            object payload = JsonConvert.SerializeObject(request);
-            var response = SendRequest("https://test-htp.tokenex.com/iframe/v3", payload);
-            TokenExIFrameResponse tokenExResponse = JsonConvert.DeserializeObject<TokenExIFrameResponse>(response.Content);
-
-            return tokenExResponse;
-
-
-        }
-
-        public CreatePaymentResponse CreatePayment(CreatePaymentRequest request)
-        {
-            object payload = JsonConvert.SerializeObject(request);
-            var response = SendRequest(PaymentsResource.baseUrl + "/paymentshub/api/v1/payments", payload);
-            CreatePaymentResponse createPaymentResponse = JsonConvert.DeserializeObject<CreatePaymentResponse>(response.Content);
-
-            return createPaymentResponse;
-        }
-
-        private IRestResponse SendRequest(string url, object payload)
+        private IRestResponse SendRequest(string url, string payload)
         {
             var client = new RestClient(url);
             var request = new RestRequest(Method.POST);
             request.AddJsonBody(payload);
             request.AddHeader("X-CorrelationId", "value");
             request.AddHeader("X-Origin", PaymentsResource.baseUrl);
-            IRestResponse response = client.Execute(request);
+            var response = client.Execute(request);
             return response;
         }
     }

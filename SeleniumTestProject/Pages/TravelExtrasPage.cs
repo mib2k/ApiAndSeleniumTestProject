@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
-using SeleniumTestProject.Pages;
 
-namespace SeleniumTestProject
+namespace SeleniumTestProject.Pages
 {
     public class TravelExtrasPage : BasePage
     {

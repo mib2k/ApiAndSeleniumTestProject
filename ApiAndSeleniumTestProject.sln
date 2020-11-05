@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumTestFeatures", "Sel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentsApiCore", "PaymentsApiCore\PaymentsApiCore.csproj", "{2E0A35D5-DFF4-475E-83A6-65418E39168C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContext", "TestContext\TestContext.csproj", "{8134C3A5-D82E-4518-BCC8-4F7DB4F332A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "TestContext\Framework.csproj", "{8134C3A5-D82E-4518-BCC8-4F7DB4F332A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
