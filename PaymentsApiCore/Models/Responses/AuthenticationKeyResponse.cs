@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
-namespace PaymentsApiCore.Models.Responces
+namespace PaymentsApiCore.Models.Responses
 {
     public class AuthenticationKeyResponse
     {
+        //[JsonIgnore]
         private const long serialVersionUID = 1L;
 
         public string AuthenticationKey { get; set; }

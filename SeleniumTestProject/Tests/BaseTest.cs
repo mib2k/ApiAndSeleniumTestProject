@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
 using static SeleniumTestProject.Utils.WebDriverManager;
 
 namespace SeleniumTestProject.Tests

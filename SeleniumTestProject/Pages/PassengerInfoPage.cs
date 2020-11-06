@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
-using SeleniumTestProject.ElementExtensions;
 using SeleniumTestProject.Utils;
 using System;
 

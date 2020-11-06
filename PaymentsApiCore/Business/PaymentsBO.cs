@@ -1,71 +1,67 @@
-﻿using Newtonsoft.Json;
+﻿using PaymentsApiCore.Client;
 using PaymentsApiCore.Models;
 using PaymentsApiCore.Models.Requests;
-using PaymentsApiCore.Models.Responces;
-using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PaymentsApiCore.Models.Responses;
 
 namespace PaymentsApiCore.Business
 {
     class PaymentsBO
     {
-        public static string CARD_PAYMENT = "CARD";
-        public static string WEB_CHANNEL = "web";
-        private PaymentClient client;
+        public static string CardPayment => "CARD";
+        public static string WebChannel => "web";
+        private readonly PaymentClient client;
 
         public PaymentsBO()
         {
-            this.client = new PaymentClient();
+            client = new PaymentClient();
         }
 
         public void AuthenticatePayment()
         {
-            AuthenticationKeyRequest authRQ = new AuthenticationKeyRequest
+            var authRQ = new AuthenticationKeyRequest
             {
-                Channel = WEB_CHANNEL,
-                PaymentMethod = CARD_PAYMENT
+                Channel = WebChannel,
+                PaymentMethod = CardPayment
             };
 
-            AuthenticationKeyResponse authRS = client.AuthenticatePayment(authRQ);
+            var authResponse = client.AuthenticatePayment(authRQ);
         }
 
-        public TokenExIFrameResponse GetTokenExResponse(AuthenticationKeyResponse authRS)
+        public TokenExIFrameResponse GetTokenExResponse(AuthenticationKeyResponse authResponse)
         {
-            TokenExIFrameRequest tokenExRQ = new TokenExIFrameRequest
+            var tokenRequest = new TokenExIFrameRequest
             {
-                AuthenticationKey = authRS.AuthenticationKey,
-                TokenExId = authRS.TokProviderClientId,
-                Origin = authRS.Origin,
-
-                Timestamp = authRS.Timestamp,
-                Data = "4263970000005262",
-                CvvValue = "123",
-                TokenScheme = authRS.TokenScheme,
-                CvvOnly = false,
-                Pci = true,
-                Cvv = true
+                AuthenticationKey = authResponse.AuthenticationKey,
+                TokenExId         = authResponse.TokProviderClientId,
+                Origin            = authResponse.Origin,
+                Timestamp         = authResponse.Timestamp,
+                Data              = "4263970000005262",
+                CvvValue          = "123",
+                TokenScheme       = authResponse.TokenScheme,
+                CvvOnly           = false,
+                Pci               = true,
+                Cvv               = true
             };
 
-            TokenExIFrameResponse tokenExRS = client.TokenEx(tokenExRQ);
-
-            return tokenExRS;
+            var tokenResponse = client.TokenEx(tokenRequest);
+            return tokenResponse;
         }
 
-        public CreatePaymentResponse CreatePayment(Decimal TotalAmount, string CurrencyCode, TokenExIFrameResponse TokenExRs)
+        public CreatePaymentResponse CreatePayment(decimal totalAmount, string currencyCode, TokenExIFrameResponse tokenResponse)
         {
-            CreatePaymentRequest createPaymentRequest = new CreatePaymentRequest
+            var paymentRequest = new CreatePaymentRequest
             {
-                Channel = WEB_CHANNEL,
-                PaymentMethod = CARD_PAYMENT,
-                Amount = TotalAmount,
-                CurrencyCode = CurrencyCode
+                Channel       = WebChannel,
+                PaymentMethod = CardPayment,
+                Amount        = totalAmount,
+                CurrencyCode  = currencyCode
             };
-            PaymentData paymentData = new PaymentData();
-            paymentData.PreparePaymentData(TokenExRs);
-            createPaymentRequest.PaymentData = paymentData.ToString();
-            return client.CreatePayment(createPaymentRequest);
+
+            var paymentData = new PaymentData();
+            paymentData.PreparePaymentData(tokenResponse);
+            paymentRequest.PaymentData = paymentData.ToString();
+            var paymentResponse = client.CreatePayment(paymentRequest);
+            return paymentResponse;
         }
     }
 }

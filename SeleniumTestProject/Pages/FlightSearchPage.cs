@@ -2,7 +2,6 @@
 using SeleniumTestProject.ElementExtensions;
 using SeleniumTestProject.Utils;
 using System.Collections.Generic;
-using TestContext;
 using static SeleniumTestProject.Utils.WebDriverManager;
 
 namespace SeleniumTestProject.Pages

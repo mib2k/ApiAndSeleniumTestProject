@@ -1,18 +1,13 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TestContext;
+﻿using Framework;
 
 namespace SeleniumTestProject.Utils
 {
     class WebDriverUtils
     {
-
-        public static void SaveCookieByName(string CookieName)
+        public static void SaveCookieByName(string cookieName)
         {
-            Cookie NamedCookie = WebDriverManager.Driver.Manage().Cookies.GetCookieNamed(CookieName);
-            Context.Current.KeyValuePairs.Add(NamedCookie.Name, NamedCookie.Value);
+            var namedCookie = WebDriverManager.Driver.Manage().Cookies.GetCookieNamed(cookieName);
+            Context.Current.KeyValuePairs.Add(namedCookie.Name, namedCookie.Value);
         }
     }
 }

@@ -7,8 +7,8 @@ namespace SeleniumTestFeatures
     [Binding]
     public class MainBookingFlowStepDefinitions
     {
-        LandingPageSteps landingSteps = new LandingPageSteps();
-        FlightSearchSteps flightSearchSteps = new FlightSearchSteps();
+        readonly LandingPageSteps landingSteps = new LandingPageSteps();
+        readonly FlightSearchSteps flightSearchSteps = new FlightSearchSteps();
 
         //SeatSelectionSteps seatSelectionSteps;
         //PaxInfoSteps paxInfo;

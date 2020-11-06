@@ -1,4 +1,5 @@
 ﻿using SeleniumTestProject.ElementExtensions;
+using SeleniumTestProject.Pages;
 
 namespace SeleniumTestProject.Steps
 {

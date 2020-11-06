@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PaymentsApiCore.Models.Responces
+﻿namespace PaymentsApiCore.Models.Responses
 {
     public class TokenExIFrameResponse
     {

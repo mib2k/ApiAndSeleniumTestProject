@@ -23,29 +23,29 @@ namespace SeleniumTestProject.Steps
             _landingPage.OneWayRadio.Click();
         }
 
-        public void SetAirports(string From, string To)
+        public void SetAirports(string @from, string to)
         {
             _landingPage.OriginInput.Click();
-            _landingPage.OriginInput.SendKeys(From);
+            _landingPage.OriginInput.SendKeys(@from);
             _landingPage.OriginInput.SendKeys(Keys.Enter);
 
             _landingPage.DestinationInput.Click();
-            _landingPage.DestinationInput.SendKeys(To);
+            _landingPage.DestinationInput.SendKeys(to);
             _landingPage.DestinationInput.SendKeys(Keys.Enter);
         }
 
-        public void SetDates(DateTime DateFrom, DateTime? DateTo = null)
+        public void SetDates(DateTime dateFrom, DateTime? dateTo = null)
         {
             _landingPage.PickerOutboundDateInput.Click();
-            var daysColletion = _landingPage.PickerCalendar.FindElements(
+            var daysCollection = _landingPage.PickerCalendar.FindElements(
                 By.XPath(".//*[contains(@class, 'ui-state-default') and(not(ancestor::*[contains(@class, 'ui-datepicker-unselectable')]))]")).ToList();
 
-            var DayFrom = daysColletion.Where(e => e.Text == DateFrom.Day.ToString()).First();
-            DayFrom.Click();
-            if (DateTo != null)
+            var dayFrom = daysCollection.First(e => e.Text == dateFrom.Day.ToString());
+            dayFrom.Click();
+            if (dateTo != null)
             {
-                var DayTo = daysColletion.Where(e => e.Text == DateTo?.Day.ToString()).First();
-                DayTo.Click();
+                var dayTo = daysCollection.First(e => e.Text == dateTo?.Day.ToString());
+                dayTo.Click();
             }
         }
 
